@@ -5,6 +5,9 @@ const errorHandler = require("./middleware/errorHandler");
 const inventoryRoutes = require(
   "./routes/inventoryRoutes"
 );
+const analyticsRoutes = require(
+  "./routes/analyticsRoutes"
+);
 
 const app = express();
 
@@ -28,6 +31,10 @@ app.get("/health", (_, res) => {
 app.use(
   "/api/inventory",
   inventoryRoutes
+);
+app.use(
+  "/api/analytics",
+  analyticsRoutes
 );
 
 app.use(errorHandler);
