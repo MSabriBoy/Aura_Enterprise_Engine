@@ -2,6 +2,9 @@ const express = require("express");
 const cors = require("cors");
 const morgan = require("morgan");
 const errorHandler = require("./middleware/errorHandler");
+const inventoryRoutes = require(
+  "./routes/inventoryRoutes"
+);
 
 const app = express();
 
@@ -21,6 +24,11 @@ app.get("/health", (_, res) => {
     service: "Aura Enterprise Engine",
   });
 });
+
+app.use(
+  "/api/inventory",
+  inventoryRoutes
+);
 
 app.use(errorHandler);
 
