@@ -42,7 +42,7 @@ function DashboardPage() {
         Aura Enterprise Engine
       </h1>
 
-      <div className="grid grid-cols-3 gap-4">
+      <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
         <KpiCard
           title="Total SKUs"
           value={
@@ -68,7 +68,7 @@ function DashboardPage() {
         />
       </div>
 
-      <div className="mt-8 grid grid-cols-2 gap-6">
+      <div className="mt-8 grid gap-6 lg:grid-cols-2">
   <LowStockChart
     data={
       analytics.lowStockProducts

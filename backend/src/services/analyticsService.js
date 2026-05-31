@@ -52,6 +52,13 @@ const getAnalytics = async () => {
 
         Product.aggregate([
             {
+  $match: {
+    stockQuantity: {
+      $gt: 0
+    }
+  }
+},
+            {
                 $sort: {
                     stockQuantity: 1,
                 },
