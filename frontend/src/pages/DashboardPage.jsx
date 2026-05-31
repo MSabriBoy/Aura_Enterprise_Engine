@@ -9,6 +9,9 @@ from "../services/analyticsService";
 import KpiCard
 from "../components/KpiCard";
 
+import LowStockChart from "../components/LowStockChart";
+import CategoryValuationChart from "../components/CategoryValuationChart";
+
 function DashboardPage() {
   const [analytics,
     setAnalytics] = useState(null);
@@ -64,6 +67,21 @@ function DashboardPage() {
           }
         />
       </div>
+
+      <div className="mt-8 grid grid-cols-2 gap-6">
+  <LowStockChart
+    data={
+      analytics.lowStockProducts
+    }
+  />
+
+  <CategoryValuationChart
+    data={
+      analytics.categoryValuation
+    }
+  />
+</div>
+
     </div>
   );
 }
