@@ -1,13 +1,34 @@
 const express = require("express");
 
 const {
-  getInventory,
+    getInventory,
+    createProduct,
+    updateProduct,
 } = require(
-  "../controllers/inventoryController"
+    "../controllers/inventoryController"
 );
 
+const validateRequest = require(
+    "../middleware/validateRequest"
+);
+
+const productSchema = require(
+    "../validators/productValidator"
+);
 const router = express.Router();
 
 router.get("/", getInventory);
+
+router.post(
+    "/",
+    validateRequest(productSchema),
+    createProduct
+);
+
+router.put(
+    "/:id",
+    validateRequest(productSchema),
+    updateProduct
+);
 
 module.exports = router;
