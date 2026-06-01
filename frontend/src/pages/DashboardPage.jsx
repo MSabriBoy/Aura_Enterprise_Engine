@@ -35,9 +35,6 @@ function DashboardPage() {
             </div>
         );
     }
-    console.log(
-  analytics.lowStockProducts
-);
 
     return (
         <div className="p-6">

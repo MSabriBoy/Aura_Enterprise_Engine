@@ -27,6 +27,9 @@ import ExportButton
 import { exportToCsv }
     from "../utils/exportToCsv";
 
+import SortDropdown
+from "../components/SortDropdown";
+
 function InventoryPage() {
     const [products,
         setProducts] = useState([]);
@@ -44,6 +47,8 @@ function InventoryPage() {
         currentPage: 1,
         totalPages: 1,
     });
+
+    const [sort, setSort] = useState("");
 
     const debouncedSearch =
         useDebounce(search);
@@ -83,9 +88,9 @@ function InventoryPage() {
                     await fetchInventory({
                         page,
                         limit: 10,
-                        search:
-                            debouncedSearch,
+                        search: debouncedSearch,
                         category,
+                        sort,
                     });
 
                 setProducts(
@@ -100,11 +105,12 @@ function InventoryPage() {
         page,
         category,
         debouncedSearch,
+        sort,
     ]);
 
     useEffect(() => {
         setPage(1);
-    }, [debouncedSearch, category]);
+    }, [debouncedSearch, category, sort]);
 
     return (
         <div className="p-6">
@@ -118,6 +124,10 @@ function InventoryPage() {
                     value={category}
                     onChange={setCategory}
                 />
+                <SortDropdown
+  value={sort}
+  onChange={setSort}
+/>
                 <ExportButton
                     onExport={handleExport}
                     disabled={!products.length}
