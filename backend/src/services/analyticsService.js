@@ -51,32 +51,46 @@ const getAnalytics = async () => {
         ]),
 
         Product.aggregate([
-            {
+ {
   $match: {
-    stockQuantity: {
-      $gt: 0
+    $expr: {
+      $and: [
+        {
+          $gt: [
+            "$stockQuantity",
+            0
+          ]
+        },
+        {
+          $lt: [
+            "$stockQuantity",
+            "$reorderLevel"
+          ]
+        }
+      ]
     }
   }
 },
-            {
-                $sort: {
-                    stockQuantity: 1,
-                },
-            },
 
-            {
-                $limit: 10,
-            },
+  {
+    $sort: {
+      stockQuantity: 1,
+    },
+  },
 
-            {
-                $project: {
-                    productName: 1,
-                    sku: 1,
-                    stockQuantity: 1,
-                    reorderLevel: 1,
-                },
-            },
-        ]),
+  {
+    $limit: 10,
+  },
+
+  {
+    $project: {
+      productName: 1,
+      sku: 1,
+      stockQuantity: 1,
+      reorderLevel: 1,
+    },
+  },
+]),
 
         Product.aggregate([
             {

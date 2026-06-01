@@ -6,10 +6,12 @@ import {
   Tooltip,
   ResponsiveContainer,
   CartesianGrid,
+  Legend,
 } from "recharts";
 
 function LowStockChart({
   data,
+  
 }) {
   return (
     <div className="rounded-xl border bg-white p-5 shadow-sm">
@@ -23,22 +25,31 @@ function LowStockChart({
           height="100%"
         >
           <BarChart data={data}>
-            <CartesianGrid
-              strokeDasharray="3 3"
-            />
+  <CartesianGrid strokeDasharray="3 3" />
 
-            <XAxis
-              dataKey="sku"
-            />
+  <XAxis dataKey="sku" />
 
-            <YAxis />
+  <YAxis />
 
-            <Tooltip />
+  <Tooltip />
 
-            <Bar
-              dataKey="stockQuantity"
-            />
-          </BarChart>
+  <Legend />
+
+  <Bar
+    dataKey="stockQuantity"
+    fill="#ef4444"
+    name="Current Stock"
+    barSize={20}
+  />
+
+  <Bar
+    dataKey="reorderLevel"
+    fill="#3b82f6"
+    name="Reorder Level"
+    barSize={20}
+  />
+
+</BarChart>
         </ResponsiveContainer>
       </div>
     </div>
