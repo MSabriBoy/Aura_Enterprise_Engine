@@ -1,89 +1,86 @@
 import {
-  useEffect,
-  useState,
+    useEffect,
+    useState,
 } from "react";
 
 import { fetchAnalytics }
-from "../services/analyticsService";
+    from "../services/analyticsService";
 
 import KpiCard
-from "../components/KpiCard";
+    from "../components/KpiCard";
 
 import LowStockChart from "../components/LowStockChart";
 import CategoryValuationChart from "../components/CategoryValuationChart";
 
 function DashboardPage() {
-  const [analytics,
-    setAnalytics] = useState(null);
+    const [analytics,
+        setAnalytics] = useState(null);
 
-  useEffect(() => {
-    const loadDashboard =
-      async () => {
-        const data =
-          await fetchAnalytics();
+    useEffect(() => {
+        const loadDashboard =
+            async () => {
+                const data =
+                    await fetchAnalytics();
 
-        setAnalytics(data);
-      };
+                setAnalytics(data);
+            };
 
-    loadDashboard();
-  }, []);
+        loadDashboard();
+    }, []);
 
-  if (!analytics) {
+    if (!analytics) {
+        return (
+            <div>
+                Loading...
+            </div>
+        );
+    }
+
     return (
-      <div>
-        Loading...
-      </div>
+        <div className="p-6">
+
+            <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+                <KpiCard
+                    title="Total SKUs"
+                    value={
+                        analytics.summary
+                            .totalSkus
+                    }
+                />
+
+                <KpiCard
+                    title="Inventory Value"
+                    value={`$${Math.round(
+                        analytics.summary
+                            .totalInventoryValue
+                    ).toLocaleString()}`}
+                />
+
+                <KpiCard
+                    title="Out Of Stock"
+                    value={
+                        analytics.summary
+                            .outOfStockCount
+                    }
+                />
+            </div>
+
+            <div className="mt-8 grid gap-6 lg:grid-cols-2">
+                <LowStockChart
+                    data={
+                        analytics.lowStockProducts
+                    }
+                />
+
+                <CategoryValuationChart
+                    data={
+                        analytics.categoryValuation
+                    }
+                />
+            </div>
+
+        </div>
     );
-  }
-
-  return (
-    <div className="p-6">
-      <h1 className="mb-6 text-3xl font-bold">
-        Aura Enterprise Engine
-      </h1>
-
-      <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-        <KpiCard
-          title="Total SKUs"
-          value={
-            analytics.summary
-              .totalSkus
-          }
-        />
-
-        <KpiCard
-          title="Inventory Value"
-          value={`$${Math.round(
-            analytics.summary
-              .totalInventoryValue
-          ).toLocaleString()}`}
-        />
-
-        <KpiCard
-          title="Out Of Stock"
-          value={
-            analytics.summary
-              .outOfStockCount
-          }
-        />
-      </div>
-
-      <div className="mt-8 grid gap-6 lg:grid-cols-2">
-  <LowStockChart
-    data={
-      analytics.lowStockProducts
-    }
-  />
-
-  <CategoryValuationChart
-    data={
-      analytics.categoryValuation
-    }
-  />
-</div>
-
-    </div>
-  );
 }
 
 export default DashboardPage;

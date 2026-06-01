@@ -108,10 +108,6 @@ function InventoryPage() {
 
     return (
         <div className="p-6">
-            <h1 className="mb-6 text-3xl font-bold">
-                Inventory
-            </h1>
-
             <div className="mb-6 flex gap-4">
                 <SearchBar
                     value={search}
