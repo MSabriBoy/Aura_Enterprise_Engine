@@ -1,8 +1,7 @@
-import DashboardPage
-from "./pages/DashboardPage";
+import InventoryPage from "./pages/InventoryPage";
 
 function App() {
-  return <DashboardPage />;
+  return <InventoryPage />;
 }
 
 export default App;
