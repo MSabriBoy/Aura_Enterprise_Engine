@@ -18,13 +18,21 @@ function InventoryTable({
               Category
             </th>
 
-            <th className="p-3 text-left">
-              Price
-            </th>
+           <th className="p-3 text-left">
+  Price
+</th>
 
-            <th className="p-3 text-left">
-              Stock
-            </th>
+<th className="p-3 text-left">
+  Cost
+</th>
+
+<th className="p-3 text-left">
+  Stock
+</th>
+
+<th className="p-3 text-left">
+  Reorder Level
+</th>
           </tr>
         </thead>
 
@@ -51,15 +59,21 @@ function InventoryTable({
                   }
                 </td>
 
-                <td className="p-3">
-                  ${product.price}
-                </td>
+               <td className="p-3">
+  ${product.price}
+</td>
 
-                <td className="p-3">
-                  {
-                    product.stockQuantity
-                  }
-                </td>
+<td className="p-3">
+  ${product.cost}
+</td>
+
+<td className="p-3">
+  {product.stockQuantity}
+</td>
+
+<td className="p-3">
+  {product.reorderLevel}
+</td>
               </tr>
             )
           )}

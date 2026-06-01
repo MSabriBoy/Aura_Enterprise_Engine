@@ -21,6 +21,12 @@ from "../components/Pagination";
 import useDebounce
 from "../hooks/useDebounce";
 
+import ExportButton
+from "../components/ExportButton";
+
+import { exportToCsv }
+from "../utils/exportToCsv";
+
 function InventoryPage() {
   const [products,
     setProducts] = useState([]);
@@ -41,6 +47,34 @@ function InventoryPage() {
 
   const debouncedSearch =
     useDebounce(search);
+
+    const handleExport = () => {
+  exportToCsv({
+    filename: "inventory-export.csv",
+
+    columns: [
+      "SKU",
+      "Product",
+      "Category",
+      "Price",
+      "Cost",
+      "Stock",
+      "Reorder Level",
+    ],
+
+    rows: products.map(
+      (product) => [
+        product.sku,
+        product.productName,
+        product.category,
+        product.price,
+        product.cost,
+        product.stockQuantity,
+        product.reorderLevel,
+      ]
+    ),
+  });
+};
 
   useEffect(() => {
     const loadInventory =
@@ -88,6 +122,11 @@ function InventoryPage() {
           value={category}
           onChange={setCategory}
         />
+        <ExportButton
+    onExport={handleExport}
+    disabled={!products.length}
+  />
+  
       </div>
 
       <InventoryTable
