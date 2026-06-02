@@ -28,7 +28,13 @@ import { exportToCsv }
     from "../utils/exportToCsv";
 
 import SortDropdown
-from "../components/SortDropdown";
+    from "../components/SortDropdown";
+
+import PriceFilter
+from "../components/PriceFilter";    
+
+import StockFilter
+from "../components/StockFilter";
 
 function InventoryPage() {
     const [products,
@@ -49,6 +55,12 @@ function InventoryPage() {
     });
 
     const [sort, setSort] = useState("");
+
+    const [priceRange,
+  setPriceRange] = useState("");
+
+  const [stockLevel,
+  setStockLevel] = useState("");
 
     const debouncedSearch =
         useDebounce(search);
@@ -90,6 +102,8 @@ function InventoryPage() {
                         limit: 10,
                         search: debouncedSearch,
                         category,
+                        priceRange,
+                        stockLevel,
                         sort,
                     });
 
@@ -105,12 +119,14 @@ function InventoryPage() {
         page,
         category,
         debouncedSearch,
+        priceRange,
+        stockLevel,
         sort,
     ]);
 
     useEffect(() => {
         setPage(1);
-    }, [debouncedSearch, category, sort]);
+    }, [debouncedSearch, category, sort, priceRange]);
 
     return (
         <div className="p-6">
@@ -124,10 +140,18 @@ function InventoryPage() {
                     value={category}
                     onChange={setCategory}
                 />
-                <SortDropdown
-  value={sort}
-  onChange={setSort}
+                <PriceFilter
+  value={priceRange}
+  onChange={setPriceRange}
 />
+<StockFilter
+  value={stockLevel}
+  onChange={setStockLevel}
+/>
+                <SortDropdown
+                    value={sort}
+                    onChange={setSort}
+                />
                 <ExportButton
                     onExport={handleExport}
                     disabled={!products.length}

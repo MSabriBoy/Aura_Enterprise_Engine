@@ -2,10 +2,10 @@ function InventoryTable({
     products,
 }) {
     return (
-        <div className="overflow-x-auto rounded-xl border">
+        <div className="max-h-[600px] overflow-auto rounded-xl border">
             <table className="min-w-full">
-                <thead>
-                    <tr className="border-b bg-gray-100">
+                <thead className="sticky top-0 z-10 bg-gray-100">
+                    <tr className="border-b">
                         <th className="p-3 text-left">
                             SKU
                         </th>
