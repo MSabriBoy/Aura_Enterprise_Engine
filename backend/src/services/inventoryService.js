@@ -6,6 +6,8 @@ const DEFAULT_LIMIT = 50;
 const buildSearchFilter = ({
     search,
     category,
+    priceRange,
+    stockLevel,
 }) => {
     const filters = {};
 
@@ -19,6 +21,39 @@ const buildSearchFilter = ({
     if (category) {
         filters.category = category;
     }
+
+    if (priceRange === "0-100") {
+  filters.price = {
+    $gte: 0,
+    $lte: 100,
+  };
+}
+
+if (priceRange === "100-300") {
+  filters.price = {
+    $gte: 100,
+    $lte: 300,
+  };
+}
+
+if (priceRange === "300-500") {
+  filters.price = {
+    $gte: 300,
+    $lte: 500,
+  };
+}
+
+if (priceRange === "500+") {
+  filters.price = {
+    $gte: 500,
+  };
+}
+
+if (stockLevel) {
+  filters.stockQuantity = {
+    $lt: Number(stockLevel),
+  };
+}
 
     return filters;
 };
@@ -51,6 +86,8 @@ const fetchInventory = async (query) => {
     const filters = buildSearchFilter({
         search: query.search,
         category: query.category,
+        priceRange: query.priceRange,
+        stockLevel: query.stockLevel,
     });
 
     const sortOptions = buildSortOptions(
