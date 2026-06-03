@@ -126,7 +126,7 @@ function InventoryPage() {
 
     useEffect(() => {
         setPage(1);
-    }, [debouncedSearch, category, sort, priceRange]);
+    }, [debouncedSearch, category, priceRange, stockLevel, sort,]);
 
     return (
         <div className="p-6">
