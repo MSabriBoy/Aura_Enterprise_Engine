@@ -6,9 +6,9 @@ The application is designed to manage large inventory datasets while providing o
 
 # Demo Link
 
-**(Frontend Server)[https://aura-enterprise-engine-ivory.vercel.app]** 
+**[Frontend Server](https://aura-enterprise-engine-ivory.vercel.app)** 
 
-**(Backend Server)[https://aura-enterprise-engine-wgkg.onrender.com/]**
+**[Backend Server](https://aura-enterprise-engine-wgkg.onrender.com/)**
 
 # Overview
 
