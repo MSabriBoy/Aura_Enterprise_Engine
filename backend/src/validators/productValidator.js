@@ -16,7 +16,7 @@ const productSchema = Joi.object({
   reorderLevel: Joi.number().min(0).required(),
 }).custom((value, helpers) => {
   if (value.price < value.cost) {
-    return helpers.error("any.invalid");
+    return helpers.message("Price cannot be lower than cost");
   }
 
   return value;
