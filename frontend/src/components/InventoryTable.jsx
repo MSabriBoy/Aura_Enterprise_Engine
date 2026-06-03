@@ -37,6 +37,13 @@ function InventoryTable({
                 </thead>
 
                 <tbody>
+                    {products.length === 0 && (
+                        <tr>
+                            <td colSpan="7" className="p-4 text-center">
+                                No products found
+                            </td>
+                        </tr>
+                    )}
                     {products.map(
                         (product) => (
                             <tr
