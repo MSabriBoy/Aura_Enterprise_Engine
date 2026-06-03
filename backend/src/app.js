@@ -21,6 +21,12 @@ app.use(
 app.use(express.json());
 app.use(morgan("dev"));
 
+app.get("/", (_, res) => {
+  res.json({
+    message: "Aura Enterprise Engine API Running",
+  });
+});
+
 app.get("/health", (_, res) => {
   res.status(200).json({
     status: "ok",
